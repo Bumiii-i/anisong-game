@@ -351,7 +351,12 @@ export const HostQuestionModal: React.FC = () => {
                   <div style={{ fontSize: '0.8rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#1B6342', marginBottom: '4px' }}>
                     Jawaban Benar:
                   </div>
-                  <div className="revealed-title">{question.title}</div>
+                  {question.animeTitle && (
+                    <div className="revealed-anime-title">{question.animeTitle}</div>
+                  )}
+                  <div className="revealed-title" style={question.animeTitle ? { fontSize: '1.4rem' } : undefined}>
+                    {question.title}
+                  </div>
                   <div className="revealed-artist">{question.artist}</div>
                   {question.trivia && (
                     <p style={{ marginTop: '6px', fontSize: '0.88rem', color: '#2F7C58', fontStyle: 'italic' }}>

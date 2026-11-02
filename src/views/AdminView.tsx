@@ -64,11 +64,11 @@ export const AdminView: React.FC = () => {
       id: 'cat_' + Date.now(),
       category: newCategoryName.trim(),
       questions: [
-        { id: `c_${Date.now()}_100`, points: 100, title: '', artist: '', audio: 'audio/' },
-        { id: `c_${Date.now()}_200`, points: 200, title: '', artist: '', audio: 'audio/' },
-        { id: `c_${Date.now()}_300`, points: 300, title: '', artist: '', audio: 'audio/' },
-        { id: `c_${Date.now()}_400`, points: 400, title: '', artist: '', audio: 'audio/' },
-        { id: `c_${Date.now()}_500`, points: 500, title: '', artist: '', audio: 'audio/' }
+        { id: `c_${Date.now()}_100`, points: 100, title: '', animeTitle: '', artist: '', audio: 'audio/' },
+        { id: `c_${Date.now()}_200`, points: 200, title: '', animeTitle: '', artist: '', audio: 'audio/' },
+        { id: `c_${Date.now()}_300`, points: 300, title: '', animeTitle: '', artist: '', audio: 'audio/' },
+        { id: `c_${Date.now()}_400`, points: 400, title: '', animeTitle: '', artist: '', audio: 'audio/' },
+        { id: `c_${Date.now()}_500`, points: 500, title: '', animeTitle: '', artist: '', audio: 'audio/' }
       ]
     };
 
@@ -276,7 +276,7 @@ export const AdminView: React.FC = () => {
                       onClick={() => setEditingQuestion({
                         catIndex: catIdx,
                         qIndex: null,
-                        question: { id: `c_${Date.now()}`, points: (cat.questions.length + 1) * 100, title: '', artist: '', audio: 'audio/' }
+                        question: { id: `c_${Date.now()}`, points: (cat.questions.length + 1) * 100, title: '', animeTitle: '', artist: '', audio: 'audio/' }
                       })}
                     >
                       Tambah Soal
@@ -311,10 +311,24 @@ export const AdminView: React.FC = () => {
                           {q.points} PTS
                         </span>
                         <div>
-                          <strong style={{ fontSize: '1rem' }}>{q.title || '(Belum ada judul)'}</strong>
-                          <span style={{ color: 'var(--text-sub)', marginLeft: '8px', fontSize: '0.9rem' }}>
-                            - {q.artist || '(Belum ada artis)'}
-                          </span>
+                          {q.animeTitle ? (
+                            <>
+                              <strong style={{ fontSize: '1rem' }}>{q.animeTitle}</strong>
+                              <div style={{ color: 'var(--text-sub)', fontSize: '0.9rem' }}>
+                                {q.title || '(Belum ada judul)'}
+                              </div>
+                              <div style={{ color: 'var(--text-sub)', fontSize: '0.9rem' }}>
+                                - {q.artist || '(Belum ada artis)'}
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <strong style={{ fontSize: '1rem' }}>{q.title || '(Belum ada judul)'}</strong>
+                              <span style={{ color: 'var(--text-sub)', marginLeft: '8px', fontSize: '0.9rem' }}>
+                                - {q.artist || '(Belum ada artis)'}
+                              </span>
+                            </>
+                          )}
                           <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                             Path: {q.audio} {q.snippetStart !== undefined && `(Cuplikan: ${q.snippetStart}s - ${q.snippetStart + (q.snippetDuration || 0)}s)`}
                           </div>
@@ -876,6 +890,19 @@ export const AdminView: React.FC = () => {
                     required
                   />
                 </div>
+              </div>
+
+              <div style={{ marginBottom: '14px' }}>
+                <label className="form-label">Judul Anime</label>
+                <input
+                  type="text"
+                  className="form-input"
+                  value={editingQuestion.question.animeTitle ?? ''}
+                  onChange={(e) => setEditingQuestion({
+                    ...editingQuestion,
+                    question: { ...editingQuestion.question, animeTitle: e.target.value }
+                  })}
+                />
               </div>
 
               <div style={{ marginBottom: '14px' }}>

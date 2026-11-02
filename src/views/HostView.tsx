@@ -198,6 +198,11 @@ export const HostView: React.FC = () => {
                         </span>
                       )}
                     </div>
+                    {q.animeTitle && (
+                      <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {q.animeTitle}
+                      </div>
+                    )}
                     <div style={{ fontWeight: 700, fontSize: '0.92rem', color: 'var(--text-main)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {q.title || '(Tanpa Judul)'}
                     </div>

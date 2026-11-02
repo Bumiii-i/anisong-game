@@ -99,10 +99,18 @@ export const StageView: React.FC = () => {
                     <div style={{ fontSize: '0.9rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#175438', marginBottom: '6px' }}>
                       Jawaban:
                     </div>
-                    <div className="revealed-title" style={{ fontSize: '2.2rem' }}>
+                    {activeQuestion.question.animeTitle && (
+                      <div className="revealed-anime-title">
+                        {activeQuestion.question.animeTitle}
+                      </div>
+                    )}
+                    <div
+                      className="revealed-title"
+                      style={{ fontSize: activeQuestion.question.animeTitle ? '1.65rem' : '2.35rem' }}
+                    >
                       {activeQuestion.question.title}
                     </div>
-                    <div className="revealed-artist" style={{ fontSize: '1.5rem', marginTop: '6px' }}>
+                    <div className="revealed-artist" style={{ fontSize: '1.3rem', marginTop: '6px' }}>
                       {activeQuestion.question.artist}
                     </div>
                   </div>

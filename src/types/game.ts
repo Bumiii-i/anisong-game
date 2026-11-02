@@ -2,6 +2,7 @@ export interface Question {
   id: string;
   points: number;
   title: string;
+  animeTitle?: string;
   artist: string;
   audio: string;
   video?: string;

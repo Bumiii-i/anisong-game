@@ -598,8 +598,15 @@ input, textarea, select {
   color: #175438;
 }
 
+.revealed-anime-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #175438;
+}
+
 .revealed-artist {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: #2F7C58;
   font-weight: 600;
   margin-top: 4px;
