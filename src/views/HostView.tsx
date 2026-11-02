@@ -169,7 +169,7 @@ export const HostView: React.FC = () => {
                 {cat.category}
               </div>
 
-              {cat.questions.map(q => {
+              {cat.questions.map((q, questionIndex) => {
                 const isPlayed = playedCellIds.includes(q.id);
                 return (
                   <button
@@ -191,6 +191,9 @@ export const HostView: React.FC = () => {
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
                       <span className="font-mono" style={{ fontWeight: 800, color: 'var(--color-accent-rose)', fontSize: '0.88rem' }}>
                         {q.points} PTS
+                      </span>
+                      <span className="font-mono" style={{ fontWeight: 700, color: 'var(--text-sub)', fontSize: '0.78rem' }}>
+                        SOAL #{questionIndex + 1}
                       </span>
                       {isPlayed && (
                         <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-muted)' }}>

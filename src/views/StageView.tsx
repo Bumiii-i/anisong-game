@@ -10,9 +10,15 @@ export const StageView: React.FC = () => {
   const { 
     settings, 
     activeQuestion, 
+    categories,
     timerRemaining, 
     buzzerLockedTeamName 
   } = useGameStore();
+  const activeQuestionNumber = activeQuestion && !activeQuestion.isTiebreaker
+    ? categories
+        .find(category => category.category === activeQuestion.categoryName)
+        ?.questions.findIndex(question => question.id === activeQuestion.question.id)
+    : undefined;
 
   return (
     <div className="app-container" style={{ minHeight: '100vh', background: 'var(--bg-page)' }}>
@@ -53,6 +59,12 @@ export const StageView: React.FC = () => {
             {/* Category Nameplate */}
             <div className="dialogue-nameplate" style={{ fontSize: '1.1rem', padding: '8px 24px', marginBottom: 'var(--space-5)' }}>
               <span>{activeQuestion.categoryName}</span>
+              {activeQuestionNumber !== undefined && activeQuestionNumber >= 0 && (
+                <>
+                  <span style={{ opacity: 0.4 }}>•</span>
+                  <span style={{ fontSize: '1.35rem' }}>SOAL #{activeQuestionNumber + 1}</span>
+                </>
+              )}
               <span style={{ opacity: 0.4 }}>•</span>
               <span style={{ color: '#F6C967' }}>{activeQuestion.question.points} PTS</span>
             </div>
