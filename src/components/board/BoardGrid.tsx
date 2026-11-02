@@ -79,7 +79,10 @@ export const BoardGrid: React.FC = () => {
                 disabled={isPlayed}
                 title={`${cat.category} - ${q.points} Poin`}
               >
-                {!isPlayed && q.points}
+                <span style={{ position: 'absolute', top: '8px', left: '10px', fontSize: '1.05rem', fontWeight: 700 }}>
+                  #{rowIndex + 1}
+                </span>
+                {!isPlayed && <span>{q.points}</span>}
               </button>
             );
           })}
