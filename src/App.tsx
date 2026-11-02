@@ -18,8 +18,17 @@ export function App() {
     setActiveView, 
     initFromStorage, 
     triggerBuzzer, 
-    teams 
+    teams,
+    isTimerRunning,
+    tickTimer
   } = useGameStore();
+
+  useEffect(() => {
+    if (!isTimerRunning || activeView === 'stage') return;
+
+    const interval = setInterval(tickTimer, 1000);
+    return () => clearInterval(interval);
+  }, [activeView, isTimerRunning, tickTimer]);
 
   useEffect(() => {
     initFromStorage();

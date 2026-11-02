@@ -30,7 +30,6 @@ export const HostQuestionModal: React.FC = () => {
     startTimer, 
     pauseTimer, 
     resetTimer, 
-    tickTimer,
     buzzerLockedTeamName, 
     resetBuzzer 
   } = useGameStore();
@@ -40,19 +39,6 @@ export const HostQuestionModal: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
   const [isMuted, setIsMuted] = useState<boolean>(sound.getMuted());
-
-  // Handle timer tick interval
-  useEffect(() => {
-    let interval: ReturnType<typeof setInterval> | null = null;
-    if (isTimerRunning) {
-      interval = setInterval(() => {
-        tickTimer();
-      }, 1000);
-    }
-    return () => {
-      if (interval) clearInterval(interval);
-    };
-  }, [isTimerRunning, tickTimer]);
 
   // Handle audio playback & snippet trimming
   useEffect(() => {

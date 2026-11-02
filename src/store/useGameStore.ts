@@ -230,6 +230,9 @@ export const useGameStore = create<GameState>((set, get) => ({
             if (payload.action === 'pause') set({ isTimerRunning: false });
             if (payload.action === 'reset') set({ isTimerRunning: false, timerRemaining: payload.duration });
             break;
+          case 'TIMER_TICK':
+            set({ timerRemaining: payload.remaining });
+            break;
         }
       };
     }
@@ -501,11 +504,13 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (timerRemaining <= 1) {
       sound.playTimeUp();
       set({ timerRemaining: 0, isTimerRunning: false });
+      broadcastSync('TIMER_TICK', { remaining: 0 });
       broadcastSync('TIMER_ACTION', { action: 'pause' });
     } else {
       const next = timerRemaining - 1;
       if (next <= 5) sound.playTick();
       set({ timerRemaining: next });
+      broadcastSync('TIMER_TICK', { remaining: next });
     }
   },
 
